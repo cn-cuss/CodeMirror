@@ -6,6 +6,7 @@ import { indexOf, lst } from "../util/misc";
 
 import { changeEnd } from "./change_measurement";
 import { linkedDocs } from "./document_data";
+import { Selection } from "./selection";
 
 export function History(startGen) {
   // Arrays of change events and selections. Doing something adds an
