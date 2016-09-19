@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { cmp, copyPos } from "../line/pos";
 import { stretchSpansOverChange } from "../line/spans";
 import { getBetween } from "../line/utils_line";

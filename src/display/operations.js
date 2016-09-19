@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { clipPos } from "../line/pos";
 import { findMaxLine } from "../line/spans";
 import { displayWidth, measureChar, scrollGap } from "../measurement/position_measurement";

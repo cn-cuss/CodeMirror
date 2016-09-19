@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { buildViewArray } from "../line/line_data";
 import { sawCollapsedSpans } from "../line/saw_special_spans";
 import { visualLineEndNo, visualLineNo } from "../line/spans";

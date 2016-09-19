@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { indexOf } from "../util/misc";
 
 // Find the line object corresponding to the given line number.

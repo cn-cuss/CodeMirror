@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { CodeMirror } from "./CodeMirror";
 import { activeElt } from "../util/dom";
 import { off, on } from "../util/event";

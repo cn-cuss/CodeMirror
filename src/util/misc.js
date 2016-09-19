@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 export function bind(f) {
   var args = Array.prototype.slice.call(arguments, 1);
   return function(){return f.apply(null, args);};

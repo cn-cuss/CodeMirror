@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { restartBlink } from "./selection";
 import { webkit } from "../util/browser";
 import { addClass, rmClass } from "../util/dom";

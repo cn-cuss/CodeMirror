@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { signalLater } from "../util/operation_group";
 import { restartBlink } from "../display/selection";
 import { isModifierKey, keyName, lookupKey } from "../input/keymap";

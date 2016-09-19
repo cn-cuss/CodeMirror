@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import CodeMirror from "../edit/CodeMirror";
 import { docMethodOp } from "../display/operations";
 import { Line } from "../line/line_data";

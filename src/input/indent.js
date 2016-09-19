@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { getStateBefore } from "../line/highlight";
 import { Pos } from "../line/pos";
 import { getLine } from "../line/utils_line";

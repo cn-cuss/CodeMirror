@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { runInOp } from "../display/operations";
 import { ensureCursorVisible } from "../display/scrolling";
 import { cmp } from "../line/pos";

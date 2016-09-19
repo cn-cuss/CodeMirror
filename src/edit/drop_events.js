@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { drawSelectionCursor } from "../display/selection";
 import { operation } from "../display/operations";
 import { clipPos } from "../line/pos";

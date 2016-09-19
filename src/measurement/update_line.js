@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { buildLineContent } from "../line/line_data";
 import { lineNumberFor } from "../line/utils_line";
 import { ie, ie_version } from "../util/browser";

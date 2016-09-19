@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { getOrder } from "../util/bidi";
 import { ie, ie_version, webkit } from "../util/browser";
 import { elt, joinClasses } from "../util/dom";

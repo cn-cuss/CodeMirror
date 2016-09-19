@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { operation, runInOp } from "../display/operations";
 import { prepareSelection } from "../display/selection";
 import { regChange } from "../display/view_tracking";

@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { elt } from "../util/dom";
 import { eventMixin, hasHandler, on } from "../util/event";
 import { endOperation, operation, runInOp, startOperation } from "../display/operations";

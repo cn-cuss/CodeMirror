@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { buildLineContent, LineView } from "../line/line_data";
 import { clipPos, Pos } from "../line/pos";
 import { collapsedSpanAtEnd, heightAtLine, lineIsHidden, visualLine } from "../line/spans";

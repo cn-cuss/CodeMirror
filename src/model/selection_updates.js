@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { signalLater } from "../util/operation_group";
 import { ensureCursorVisible } from "../display/scrolling";
 import { clipPos, cmp, Pos } from "../line/pos";

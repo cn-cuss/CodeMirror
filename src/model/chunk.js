@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { cleanUpLine } from "../line/line_data";
 import { indexOf } from "../util/misc";
 import { signalLater } from "../util/operation_group";

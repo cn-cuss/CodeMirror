@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { addClass, elt, rmClass } from "../util/dom";
 import { on } from "../util/event";
 import { scrollGap, paddingVert } from "../measurement/position_measurement";

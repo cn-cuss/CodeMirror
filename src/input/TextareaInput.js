@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { activeElt, removeChildrenAndAdd, selectInput } from "../util/dom";
 import { off, on, signalDOMEvent } from "../util/event";
 import { hasCopyEvent, hasSelection } from "../util/feature_detection";

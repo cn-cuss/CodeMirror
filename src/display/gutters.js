@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { elt, removeChildren } from "../util/dom";
 import { indexOf } from "../util/misc";
 

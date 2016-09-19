@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { runInOp } from "../display/operations";
 import { addToScrollPos } from "../display/scrolling";
 import { regLineChange } from "../display/view_tracking";

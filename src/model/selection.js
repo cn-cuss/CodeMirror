@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { cmp, copyPos, maxPos, minPos } from "../line/pos";
 import { indexOf } from "../util/misc";
 

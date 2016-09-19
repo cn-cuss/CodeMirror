@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { delayBlurEvent, ensureFocus } from "../display/focus";
 import { operation } from "../display/operations";
 import { visibleLines } from "../display/update_lines";

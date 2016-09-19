@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { sawCollapsedSpans } from "../line/saw_special_spans";
 import { heightAtLine, visualLineEndNo, visualLineNo } from "../line/spans";
 import { getLine, lineNumberFor } from "../line/utils_line";

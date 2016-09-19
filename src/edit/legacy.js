@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { off, on } from "../util/event";
 import { e_preventDefault, e_stop, e_stopPropagation } from "../util/event";
 import { keyMap, keyName, isModifierKey, lookupKey, normalizeKeyMap } from "../input/keymap";

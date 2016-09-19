@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { Pos } from "../line/pos";
 import { visualLine } from "../line/spans";
 import { getLine } from "../line/utils_line";

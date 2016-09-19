@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { startWorker } from "../display/highlight_worker";
 import { operation } from "../display/operations";
 import { regChange, regLineChange } from "../display/view_tracking";

@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { getStateBefore, highlightLine, processLine } from "../line/highlight";
 import { copyState } from "../modes";
 import { bind } from "../util/misc";

@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { gecko, ie, ie_version, mobile, webkit } from "../util/browser";
 import { elt } from "../util/dom";
 import { scrollerGap } from "../util/misc";

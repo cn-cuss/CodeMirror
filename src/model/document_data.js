@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { loadMode } from "../display/mode_state";
 import { regChange } from "../display/view_tracking";
 import { Line, updateLine } from "../line/line_data";

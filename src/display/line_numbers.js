@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { lineNumberFor } from "../line/utils_line";
 import { compensateForHScroll } from "../measurement/position_measurement";
 import { elt } from "../util/dom";

@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { deleteNearSelection } from "./deleteNearSelection";
 import { changeLine } from "../model/changes";
 import { commands } from "./commands";

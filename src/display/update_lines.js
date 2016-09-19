@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { heightAtLine } from "../line/spans";
 import { getLine, lineAtHeight, updateLineHeight } from "../line/utils_line";
 import { paddingTop, textHeight } from "../measurement/position_measurement";

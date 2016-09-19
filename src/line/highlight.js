@@ -1,3 +1,6 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 import { countColumn } from "../util/misc";
 import { copyState, innerMode, startState } from "../modes";
 import StringStream from "../util/StringStream";
