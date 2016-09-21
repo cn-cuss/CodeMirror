@@ -81,7 +81,7 @@
     },
 
     pick: function(data, i) {
-      var completion = data.list[i];
+      var completion = data.list[i]&&data.list[i].key;
       if (completion.hint) completion.hint(this.cm, data, completion);
       else this.cm.replaceRange(getText(completion), completion.from || data.from,
                                 completion.to || data.to, "complete");
@@ -123,9 +123,9 @@
 
       if (data && this.data && isNewCompletion(this.data, data)) return;
       this.data = data;
-
+        //修改只有一个的时候 不自动插入
       if (data && data.list.length) {
-        if (picked && data.list.length == 1) {
+        if (picked && data.list.length == 0) {
           this.pick(data, 0);
         } else {
           this.widget = new Widget(this, data);
@@ -198,6 +198,25 @@
       el = el.parentNode;
     }
   }
+    function getHintClass(type){
+        var className ='';
+        switch (type){
+            case 'Table':{
+                className = 'hint-table';
+                break;
+            }
+            case 'Keywords':{
+                className = 'hint-keyword';
+                break;
+            }
+            case 'Function' :{
+                className = 'hint-function';
+                break ;
+
+            }
+        }
+        return className;
+    }
 
   function Widget(completion, data) {
     this.completion = completion;
@@ -210,16 +229,20 @@
     this.selectedHint = data.selectedHint || 0;
 
     var completions = data.list;
+      //插入元素
     for (var i = 0; i < completions.length; ++i) {
-      var elt = hints.appendChild(document.createElement("li")), cur = completions[i];
+      var elt = hints.appendChild(document.createElement("li")), cur = completions[i].key;
       var className = HINT_ELEMENT_CLASS + (i != this.selectedHint ? "" : " " + ACTIVE_HINT_ELEMENT_CLASS);
+        //添加className
       if (cur.className != null) className = cur.className + " " + className;
-      elt.className = className;
+        className +=  " " + getHintClass(completions[i].type || 'Keywords') ;
+        elt.className = className;
       if (cur.render) cur.render(elt, data, cur);
       else elt.appendChild(document.createTextNode(cur.displayText || getText(cur)));
       elt.hintId = i;
+        console.log(completion,data)
     }
-
+       console.log(hints,'hints');
     var pos = cm.cursorCoords(completion.options.alignWithWord ? data.from : null);
     var left = pos.left, top = pos.bottom, below = true;
     hints.style.left = left + "px";

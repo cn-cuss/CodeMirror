@@ -1,0 +1,5 @@
+1.修改了mode中的sql.js.添加了 x-sql-mine类型,添加了hintWords字段，用作sql-hint提示使用
+2.修改了addon中的sql-hint，修改了获取关键字段getKeywords方法
+3.修改了addon中的show-hints文件，修改了默认的提示只有一个的时候插入的行为，修改为只有一个的时候不插入。
+4.todo 修改当前类型为hintTypes的时候 设置他的class为 hint-types
+5.提示默认转换为大写修改为显示原值

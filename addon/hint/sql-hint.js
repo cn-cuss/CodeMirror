@@ -22,10 +22,11 @@
 
   function isArray(val) { return Object.prototype.toString.call(val) == "[object Array]" }
 
-  function getKeywords(editor) {
+  function getKeyMode(editor) {
     var mode = editor.doc.modeOption;
     if (mode === "sql") mode = "text/x-sql";
-    return CodeMirror.resolveMode(mode).keywords;
+      //修改为获取关键字 hintTips
+    return CodeMirror.resolveMode(mode);
   }
 
   function getText(item) {
@@ -69,10 +70,10 @@
     return string.toUpperCase() === sub.toUpperCase();
   }
 
-  function addMatches(result, search, wordlist, formatter) {
+  function addMatches(result, search, wordlist, formatter,type) {
     if (isArray(wordlist)) {
       for (var i = 0; i < wordlist.length; i++)
-        if (match(search, wordlist[i])) result.push(formatter(wordlist[i]))
+        if (match(search, wordlist[i])) result.push({key:formatter(wordlist[i]),type:type})
     } else {
       for (var word in wordlist) if (wordlist.hasOwnProperty(word)) {
         var val = wordlist[word]
@@ -80,7 +81,7 @@
           val = word
         else
           val = val.displayText ? {text: val.text, displayText: val.displayText} : val.text
-        if (match(search, val)) result.push(formatter(val))
+        if (match(search, val)) result.push({key:formatter(val),type:type})
       }
     }
   }
@@ -225,13 +226,30 @@
     }
     return table;
   }
+    //sql  帮助类
 
+    function extend(obj,src,dist){
+        for(var j in src){
+            obj[j + ''] = src[j + ''];
+        }
+        for(var j in dist){
+            obj[j ] = dist[j];
+        }
+        return obj;
+    }
   CodeMirror.registerHelper("hint", "sql", function(editor, options) {
     tables = parseTables(options && options.tables)
     var defaultTableName = options && options.defaultTable;
     var disableKeywords = options && options.disableKeywords;
     defaultTable = defaultTableName && getTable(defaultTableName);
-    keywords = getKeywords(editor);
+
+      var model =  getKeyMode(editor);
+      keywords = model.keywords;
+
+      var keys = extend({},model.atoms,model.keys),
+          funcs = model.functions,
+          table = model.tables;
+      keys = extend(keys,model.keywords);
 
     if (defaultTableName && !defaultTable)
       defaultTable = findTableByAlias(defaultTableName, editor);
@@ -260,10 +278,16 @@
     if (search.charAt(0) == "." || search.charAt(0) == "`") {
       start = nameCompletion(cur, token, result, editor);
     } else {
-      addMatches(result, search, tables, function(w) {return w;});
-      addMatches(result, search, defaultTable, function(w) {return w;});
-      if (!disableKeywords)
-        addMatches(result, search, keywords, function(w) {return w.toUpperCase();});
+      //判断前面的一个值是不是 from
+        let val = editor.getValue();
+        let frontKey = val.substr(cur.ch-search.length - 6 ,6);
+        if(frontKey == ' from '&&cur.ch >6){
+            addMatches(result, search, table, function(w) {return w;},'Table');
+        }else{
+            addMatches(result, search, keys, function(w) {return w;},'Keywords');
+            addMatches(result, search, funcs, function(w) {return w;},'Function');
+        }
+
     }
 
     return {list: result, from: Pos(cur.line, start), to: Pos(cur.line, end)};
