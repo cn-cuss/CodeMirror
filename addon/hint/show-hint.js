@@ -240,9 +240,7 @@
       if (cur.render) cur.render(elt, data, cur);
       else elt.appendChild(document.createTextNode(cur.displayText || getText(cur)));
       elt.hintId = i;
-        console.log(completion,data)
     }
-       console.log(hints,'hints');
     var pos = cm.cursorCoords(completion.options.alignWithWord ? data.from : null);
     var left = pos.left, top = pos.bottom, below = true;
     hints.style.left = left + "px";
