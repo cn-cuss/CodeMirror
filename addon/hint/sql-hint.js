@@ -279,8 +279,8 @@
       start = nameCompletion(cur, token, result, editor);
     } else {
       //判断前面的一个值是不是 from
-        let val = editor.getValue();
-        let frontKey = val.substr(cur.ch-search.length - 6 ,6);
+        var val = editor.getValue();
+        var frontKey = val.substr(cur.ch-search.length - 6 ,6);
         if(frontKey == ' from '&&cur.ch >6){
             addMatches(result, search, table, function(w) {return w;},'Table');
         }else{
