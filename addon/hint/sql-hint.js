@@ -1,14 +1,14 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
-(function(mod) {
+(function (mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
     mod(require("../../lib/codemirror"), require("../../mode/sql/sql"));
   else if (typeof define == "function" && define.amd) // AMD
     define(["../../lib/codemirror", "../../mode/sql/sql"], mod);
   else // Plain browser env
     mod(CodeMirror);
-})(function(CodeMirror) {
+})(function (CodeMirror) {
   "use strict";
 
   var tables;
@@ -20,12 +20,14 @@
   };
   var Pos = CodeMirror.Pos, cmpPos = CodeMirror.cmpPos;
 
-  function isArray(val) { return Object.prototype.toString.call(val) == "[object Array]" }
+  function isArray(val) {
+    return Object.prototype.toString.call(val) == "[object Array]"
+  }
 
   function getKeyMode(editor) {
     var mode = editor.doc.modeOption;
     if (mode === "sql") mode = "text/x-sql";
-      //修改为获取关键字 hintTips
+    //修改为获取关键字 hintTips
     return CodeMirror.resolveMode(mode);
   }
 
@@ -70,10 +72,10 @@
     return string.toUpperCase() === sub.toUpperCase();
   }
 
-  function addMatches(result, search, wordlist, formatter,type) {
+  function addMatches(result, search, wordlist, formatter, type) {
     if (isArray(wordlist)) {
       for (var i = 0; i < wordlist.length; i++)
-        if (match(search, wordlist[i])) result.push({key:formatter(wordlist[i]),type:type})
+        if (match(search, wordlist[i])) result.push({key: formatter(wordlist[i]), type: type})
     } else {
       for (var word in wordlist) if (wordlist.hasOwnProperty(word)) {
         var val = wordlist[word]
@@ -81,7 +83,7 @@
           val = word
         else
           val = val.displayText ? {text: val.text, displayText: val.displayText} : val.text
-        if (match(search, val)) result.push({key:formatter(val),type:type})
+        if (match(search, val)) result.push({key: formatter(val), type: type})
       }
     }
   }
@@ -127,12 +129,12 @@
 
     // Try to complete table names
     var string = nameParts.join(".");
-    addMatches(result, string, tables, function(w) {
+    addMatches(result, string, tables, function (w) {
       return useBacktick ? insertBackticks(w) : w;
     });
 
     // Try to complete columns from defaultTable
-    addMatches(result, string, defaultTable, function(w) {
+    addMatches(result, string, defaultTable, function (w) {
       return useBacktick ? insertBackticks(w) : w;
     });
 
@@ -154,7 +156,7 @@
       columns = columns.columns;
 
     if (columns) {
-      addMatches(result, string, columns, function(w) {
+      addMatches(result, string, columns, function (w) {
         var tableInsert = table;
         if (alias == true) tableInsert = aliasTable;
         if (typeof w == "string") {
@@ -175,7 +177,7 @@
     var excepted = /[,;]/g;
     var words = lineText.split(" ");
     for (var i = 0; i < words.length; i++) {
-      f(words[i]?words[i].replace(excepted, '') : '');
+      f(words[i] ? words[i].replace(excepted, '') : '');
     }
   }
 
@@ -193,9 +195,9 @@
 
     //add separator
     var indexOfSeparator = fullQuery.indexOf(CONS.QUERY_DIV);
-    while(indexOfSeparator != -1) {
+    while (indexOfSeparator != -1) {
       separator.push(doc.posFromIndex(indexOfSeparator));
-      indexOfSeparator = fullQuery.indexOf(CONS.QUERY_DIV, indexOfSeparator+1);
+      indexOfSeparator = fullQuery.indexOf(CONS.QUERY_DIV, indexOfSeparator + 1);
     }
     separator.unshift(Pos(0, 0));
     separator.push(Pos(editor.lastLine(), editor.getLineHandle(editor.lastLine()).text.length));
@@ -215,7 +217,7 @@
 
     for (var i = 0; i < query.length; i++) {
       var lineText = query[i];
-      eachWord(lineText, function(word) {
+      eachWord(lineText, function (word) {
         var wordUpperCase = word.toUpperCase();
         if (wordUpperCase === aliasUpperCase && getTable(previousWord))
           table = previousWord;
@@ -226,30 +228,32 @@
     }
     return table;
   }
-    //sql  帮助类
 
-    function extend(obj,src,dist){
-        for(var j in src){
-            obj[j + ''] = src[j + ''];
-        }
-        for(var j in dist){
-            obj[j ] = dist[j];
-        }
-        return obj;
+  //sql  帮助类
+
+  function extend(obj, src, dist) {
+    for (var j in src) {
+      obj[j + ''] = src[j + ''];
     }
-  CodeMirror.registerHelper("hint", "sql", function(editor, options) {
+    for (var j in dist) {
+      obj[j] = dist[j];
+    }
+    return obj;
+  }
+
+  CodeMirror.registerHelper("hint", "sql", function (editor, options) {
     tables = parseTables(options && options.tables)
     var defaultTableName = options && options.defaultTable;
     var disableKeywords = options && options.disableKeywords;
     defaultTable = defaultTableName && getTable(defaultTableName);
 
-      var model =  getKeyMode(editor);
-      keywords = model.keywords;
+    var model = getKeyMode(editor);
+    keywords = model.keywords;
 
-      var keys = extend({},model.atoms,model.keys),
-          funcs = model.functions,
-          table = model.tables;
-      keys = extend(keys,model.keywords);
+    var keys = extend({}, model.atoms, model.keys),
+                                              funcs = model.functions,
+                                              table = model.tables;
+    keys = extend(keys, model.keywords);
 
     if (defaultTableName && !defaultTable)
       defaultTable = findTableByAlias(defaultTableName, editor);
@@ -279,14 +283,24 @@
       start = nameCompletion(cur, token, result, editor);
     } else {
       //判断前面的一个值是不是 from
-        var val = editor.getValue();
-        var frontKey = val.substr(cur.ch-search.length - 6 ,6);
-        if(frontKey == ' from '&&cur.ch >6){
-            addMatches(result, search, table, function(w) {return w;},'Table');
-        }else{
-            addMatches(result, search, keys, function(w) {return w;},'Keywords');
-            addMatches(result, search, funcs, function(w) {return w;},'Function');
-        }
+      //1. from x
+      //2.from x
+      var val = editor.getValue();
+      var len = cur.ch - search.length - 6;
+      len < 0 && (len = 0);
+      var frontKey = val.substr(len, 6).toUpperCase();
+      if (frontKey == ' FROM ' && cur.ch > 6 || cur.ch >=5 && frontKey.substr(0, 5) == 'FROM ' || frontKey == ' JOIN ' && cur.ch > 6 || cur.ch >= 5&& frontKey.substr(0, 5) == 'JOIN ') {
+        addMatches(result, search, table, function (w) {
+          return w;
+        }, 'Table');
+      } else {
+        addMatches(result, search, keys, function (w) {
+          return w;
+        }, 'Keywords');
+        addMatches(result, search, funcs, function (w) {
+          return w;
+        }, 'Function');
+      }
 
     }
 
