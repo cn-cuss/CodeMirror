@@ -286,10 +286,9 @@
       //1. from x
       //2.from x
       var val = editor.getValue();
-      var len = cur.ch - search.length - 6;
-      len < 0 && (len = 0);
-      var frontKey = val.substr(len, 6).toUpperCase();
-      if (frontKey == ' FROM ' && cur.ch > 6 || cur.ch >=5 && frontKey.substr(0, 5) == 'FROM ' || frontKey == ' JOIN ' && cur.ch > 6 || cur.ch >= 5&& frontKey.substr(0, 5) == 'JOIN ') {
+      var frontKey = val.slice(val.length - search.length - 6 ,val.length - search.length).toUpperCase();
+      var frontKey1 = val.slice(val.length - search.length - 5 ,val.length - search.length).toUpperCase();
+      if ( frontKey == ' FROM '|| (cur.ch -  search.length  ===5 )&&frontKey1 == 'FROM '|| frontKey == '\nFROM ' ||  frontKey == '\rFROM ' || frontKey  == ' JOIN '|| (cur.ch -  search.length  ===5 )&& frontKey1 == 'JOIN '||  frontKey == '\rJOIN ' ||  frontKey == '\nJOIN ') {
         addMatches(result, search, table, function (w) {
           return w;
         }, 'Table');
