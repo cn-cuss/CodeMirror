@@ -285,10 +285,13 @@
       //判断前面的一个值是不是 from
       //1. from x
       //2.from x
-      var val = editor.getValue();
-      var frontKey = val.slice(val.length - search.length - 6 ,val.length - search.length).toUpperCase();
-      var frontKey1 = val.slice(val.length - search.length - 5 ,val.length - search.length).toUpperCase();
-      if ( frontKey == ' FROM '|| (cur.ch -  search.length  ===5 )&&frontKey1 == 'FROM '|| frontKey == '\nFROM ' ||  frontKey == '\rFROM ' || frontKey  == ' JOIN '|| (cur.ch -  search.length  ===5 )&& frontKey1 == 'JOIN '||  frontKey == '\rJOIN ' ||  frontKey == '\nJOIN ') {
+      //获取当前行的值  和当前的位置
+      var line = cur.line;
+      var ch = cur.ch - search.length;
+      var val = editor.getLine(line);
+      var frontKey = val.slice(ch - 6 ,ch).toUpperCase();
+      var frontKey1 = val.slice(ch - 5 ,ch).toUpperCase();
+      if ( test(frontKey,'FROM',ch,5) ||  test(frontKey1,'FROM',ch,5) || test(frontKey,'JOIN',ch,5) ||  test(frontKey1,'JOIN',ch,5)  || test(frontKey,'TABLE',ch,6) ||  test(frontKey1,'TABLE',ch,6) ) {
         addMatches(result, search, table, function (w) {
           return w;
         }, 'Table');
@@ -301,6 +304,14 @@
         }, 'Function');
       }
 
+    }
+
+    function test(key,test,ch,len){
+      if(key === ' ' + test + ' '|| (ch   === len )&&key == test + ' ' || key =='\n' + key || key === '\r' + test){
+        return true;
+      }else{
+        return false;
+      }
     }
 
     return {list: result, from: Pos(cur.line, start), to: Pos(cur.line, end)};
