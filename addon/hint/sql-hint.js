@@ -289,9 +289,7 @@
       var line = cur.line;
       var ch = cur.ch - search.length;
       var val = editor.getLine(line);
-      var frontKey = val.slice(ch - 6 ,ch).toUpperCase();
-      var frontKey1 = val.slice(ch - 5 ,ch).toUpperCase();
-      if ( test(frontKey,'FROM',ch,5) ||  test(frontKey1,'FROM',ch,5) || test(frontKey,'JOIN',ch,5) ||  test(frontKey1,'JOIN',ch,5)  || test(frontKey,'TABLE',ch,6) ||  test(frontKey1,'TABLE',ch,6) ) {
+      if ( check('FROM',val,ch) || check('JOIN',val,ch) || check('TABLE',val,ch) ) {
         addMatches(result, search, table, function (w) {
           return w;
         }, 'Table');
@@ -305,13 +303,26 @@
       }
 
     }
-
-    function test(key,test,ch,len){
-      if(key === ' ' + test + ' '|| (ch   === len )&&key == test + ' ' || key =='\n' + key || key === '\r' + test){
+    function check(key,val,ch){
+      //判断当前的长度
+      //情况
+      //  1 :from {提示表格}   key =  val.slice(ch - from.length - 1 ,ch).toUpperCase(); key = 'FROM '
+      //  2 : from {提示表格}  key =  val.slice(ch - from.length - 2 ,ch).toUpperCase(); key = ' FROM '
+      //  3 : /rfrom {提示表格}key =  val.slice(ch - from.length - 2 ,ch).toUpperCase(); key = '/rFROM '
+      //  4 : /r from {提示表格} key =  val.slice(ch - from.length - 2 ,ch).toUpperCase(); key = ' FROM '
+      var frontKey = val.slice(ch - key.length - 2 ,ch).toUpperCase();
+      var frontKey1 = val.slice(ch - key.length - 1 ,ch).toUpperCase();
+      if(frontKey === ' ' + key + ' ' ||frontKey === '\n' + key + ' '|| frontKey === '\r' + key + ' ' ){
+        //第一种情况
         return true;
-      }else{
-        return false;
       }
+      //第一行第一个
+      if(ch === (key.length + 1)&& frontKey1 === key + ' ' ){
+
+        return true;
+      }
+      return false;
+
     }
 
     return {list: result, from: Pos(cur.line, start), to: Pos(cur.line, end)};
